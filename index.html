@@ -18,7 +18,7 @@
             <li><a href="#lab2">ЛР №2</a></li>
             <li><a href="#lab4">ЛР №4</a></li>
             <li><a href="#lab5">ЛР №5</a></li>
-            <li><a href="#lab6">ЛР №6 <span class="lab-placeholder">очікує</span></a></li>
+            <li><a href="#lab6">ЛР №6</a></li>
             <li><a href="#lab7">ЛР №7 <span class="lab-placeholder">очікує</span></a></li>
           </ul>
         </nav>
@@ -26,9 +26,9 @@
 
       <main class="content">
         <header class="hero">
-          <h2>Звіти з лабораторних робіт №1-5</h2>
+          <h2>Звіти з лабораторних робіт №1-6</h2>
           <p>
-            HTML-документ, семантична розмітка, GitHub, бізнес-логіка WEB-застосунку, CSS, функціональне застосування JavaScript, об'єкти, callback та стрілочні функції.
+            HTML-документ, семантична розмітка, GitHub, бізнес-логіка WEB-застосунку, CSS, функціональне застосування JavaScript, об'єкти, callback, стрілочні функції, DOM, події та делегування подій.
           </p>
         </header>
 
@@ -859,7 +859,205 @@ class Calculator {
 
         <section id="lab6" aria-labelledby="lab6-title">
           <h2 id="lab6-title">Лабораторна робота №6</h2>
-          <p>Розділ буде заповнено після виконання відповідної лабораторної роботи.</p>
+          <p>
+            Тема: прототипи, класи, об'єктна модель документа DOM, події, об'єкт події та делегування подій.
+          </p>
+          <table class="info-table">
+            <tbody>
+              <tr>
+                <th scope="row">Мета</th>
+                <td>Придбати практичні навички роботи з DOM, подіями, об'єктом події та делегуванням подій.</td>
+              </tr>
+              <tr>
+                <th scope="row">Постановка задачі</th>
+                <td>
+                  У власному WEB-застосунку створити програмний код делегування подій: при виборі елемента в колекції елементів відкривається модальне вікно з описом цього елемента. Використовуючи JavaScript, виконати варіанти 1, 3, 5, 7, 8, 9 і 10 для непарного номера у списку групи.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">WEB-застосунок</th>
+                <td><a href="../IP-zp51_appWEB-YereshchenkoMO-FIOT-2025/lab6-dom.html">StudyTask: сторінка ЛР №6 DOM і події</a></td>
+              </tr>
+              <tr>
+                <th scope="row">HTML/CSS/JS-файли</th>
+                <td><code>lab6-dom.html</code>, <code>style.css</code>, <code>assets/lab6.js</code></td>
+              </tr>
+              <tr>
+                <th scope="row">Варіант</th>
+                <td>Номер у списку групи: 5, тобто непарний номер. Виконано варіанти 1, 3, 5, 7, 8, 9 і 10.</td>
+              </tr>
+              <tr>
+                <th scope="row">GitHub/GitHub Pages</th>
+                <td>
+                  <a href="https://github.com/yereshchenkomo-zpi51-spec/IP-zp51_appWEB-YereshchenkoMO-FIOT-2025">WEB-репозиторій</a>,
+                  <a href="https://yereshchenkomo-zpi51-spec.github.io/IP-zp51_appWEB-YereshchenkoMO-FIOT-2025/lab6-dom.html">сторінка ЛР №6 на GitHub Pages</a>.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section aria-labelledby="lab6-delegation-title">
+          <h2 id="lab6-delegation-title">Делегування подій і модальне вікно</h2>
+          <p>
+            Для прикладу делегування створено колекцію навчальних матеріалів. Один слухач події на контейнері <code>#materials-list</code> знаходить обраний елемент через <code>closest()</code>, після чого відкриває модальне вікно з описом. Для демонстрації прототипів і класів використано клас <code>StudyMaterial</code> та метод у прототипі.
+          </p>
+          <pre class="code-block"><code>class StudyMaterial {
+  constructor(id, title, description, duration) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.duration = duration;
+  }
+
+  getSummary() {
+    return `${this.title}: ${this.description}`;
+  }
+}
+
+StudyMaterial.prototype.getMeta = function () {
+  return `Орієнтовний час опрацювання: ${this.duration}.`;
+};
+
+function handleMaterialDelegation(event) {
+  const selected = event.target.closest("[data-material-id]");
+  const list = event.currentTarget;
+
+  if (!selected || !list.contains(selected)) {
+    return;
+  }
+
+  const material = getMaterialById(selected.dataset.materialId);
+  openMaterialModal(material);
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab6-delegation-modal.png" alt="Модальне вікно ЛР №6 після делегування події">
+            <figcaption>Модальне вікно відкривається після вибору елемента в колекції навчальних матеріалів.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab6-variants-1-5-title">
+          <h2 id="lab6-variants-1-5-title">Варіанти 1, 3 і 5</h2>
+          <p>
+            Варіант 1 виводить значення input у console. Варіант 3 приховує і розкриває текст, змінюючи стан кнопки. Варіант 5 слухає клік на <code>window</code> і визначає, чи знаходиться ціль кліку всередині <code>div#place</code>.
+          </p>
+          <pre class="code-block"><code>function showInputValue(value) {
+  const message = `SHOW ME: ${value}`;
+  writeOutput("1", message);
+  return message;
+}
+
+function toggleSecretText(input, button, preview) {
+  const isHidden = input.type === "password";
+
+  if (isHidden) {
+    input.type = "text";
+    preview.textContent = input.value;
+    button.textContent = "Приховати";
+    return input.value;
+  }
+
+  const masked = "*".repeat(input.value.length);
+  input.type = "password";
+  preview.textContent = masked;
+  button.textContent = "Розкрити";
+  return masked;
+}
+
+function isClickInsidePlace(target, placeElement) {
+  return Boolean(placeElement &amp;&amp; (target === placeElement || placeElement.contains(target)));
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab6-variants-1-5.png" alt="Результати варіантів 1, 3 і 5 ЛР №6">
+            <figcaption>Результати виведення input, приховування тексту та перевірки кліку в зеленому прямокутнику.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab6-variants-7-8-title">
+          <h2 id="lab6-variants-7-8-title">Варіанти 7 і 8</h2>
+          <p>
+            Варіант 7 аналізує список <code>ul#categories</code> через DOM-навігацію та <code>forEach()</code>. Варіант 8 обробляє форму логіна за подією <code>submit</code>, не перезавантажує сторінку, перевіряє заповнення полів через JavaScript і збирає дані через <code>elements</code>.
+          </p>
+          <pre class="code-block"><code>function analyzeCategories(categoriesRoot) {
+  const items = [...categoriesRoot.querySelectorAll(":scope &gt; .item")];
+  return {
+    count: items.length,
+    categories: items.map((item) =&gt; ({
+      title: item.querySelector("h2, h3").textContent.trim(),
+      elements: item.querySelectorAll("ul &gt; li").length,
+    })),
+  };
+}
+
+function collectLoginData(form) {
+  const email = form.elements.email.value.trim();
+  const password = form.elements.password.value.trim();
+
+  if (!email || !password) {
+    return { ok: false, message: "All form fields must be filled in" };
+  }
+
+  return { ok: true, data: { email, password } };
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab6-variants-7-8.png" alt="Результати варіантів 7 і 8 ЛР №6">
+            <figcaption>Підрахунок категорій і успішна обробка форми логіна.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab6-variants-9-10-title">
+          <h2 id="lab6-variants-9-10-title">Варіанти 9 і 10</h2>
+          <p>
+            Варіант 9 змінює фон сторінки випадковим hex-кольором і записує значення у <code>span.color</code>. Варіант 10 створює та очищає колекцію блоків у <code>div#boxes</code> з перевіркою кількості від 1 до 100.
+          </p>
+          <pre class="code-block"><code>function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, "0")}`;
+}
+
+function createBoxes(amount, container = document.getElementById("boxes")) {
+  const normalizedAmount = Number(amount);
+
+  if (!Number.isInteger(normalizedAmount) || normalizedAmount &lt; 1 || normalizedAmount &gt; 100) {
+    writeOutput("10", "Введіть ціле число від 1 до 100.");
+    return [];
+  }
+
+  container.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+  for (let index = 0; index &lt; normalizedAmount; index += 1) {
+    const size = 30 + index * 10;
+    const box = document.createElement("div");
+    box.style.width = `${size}px`;
+    box.style.height = `${size}px`;
+    box.style.backgroundColor = getRandomHexColor();
+    fragment.append(box);
+  }
+  container.append(fragment);
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab6-variants-9-10.png" alt="Результати варіантів 9 і 10 ЛР №6">
+            <figcaption>Зміна кольору фону та створення колекції блоків зі зростанням розміру.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab6-console-title">
+          <h2 id="lab6-console-title">Console output задач ЛР №6</h2>
+          <p>
+            Кнопка "Запустити всі демо" виконує контрольний сценарій: показує значення input, приховує текст, перевіряє клік у <code>#place</code>, рахує категорії, обробляє форму, змінює фон, створює блоки і відкриває модальне вікно через делегування.
+          </p>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab6-console.png" alt="Console output для задач ЛР №6">
+            <figcaption>Загальний console output після запуску контрольного сценарію ЛР №6.</figcaption>
+          </figure>
+        </section>
+
+        <section class="conclusion" aria-labelledby="lab6-conclusion-title">
+          <h2 id="lab6-conclusion-title">Висновки до ЛР №6</h2>
+          <p>
+            У лабораторній роботі №6 реалізовано роботу з DOM-елементами, обробниками подій, об'єктом події, формою login, inline-стилями, створенням DOM-вузлів і делегуванням подій. Для перевірки створено окрему сторінку WEB-застосунку, загальний файл <code>style.css</code> і JS-модуль <code>assets/lab6.js</code> з експортом функцій у <code>window.Lab6</code> для executable-перевірок.
+          </p>
         </section>
 
         <section id="lab7" aria-labelledby="lab7-title">
