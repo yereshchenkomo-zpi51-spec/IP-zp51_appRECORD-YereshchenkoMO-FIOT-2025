@@ -196,6 +196,10 @@ section h3 {
   font-size: 13px;
 }
 
+.two-cols article {
+  min-width: 0;
+}
+
 .conclusion {
   border-left: 4px solid var(--green);
 }
