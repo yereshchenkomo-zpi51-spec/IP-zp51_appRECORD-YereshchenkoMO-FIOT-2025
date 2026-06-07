@@ -16,7 +16,7 @@
           <ul class="nav-list">
             <li><a class="active" href="#lab1">ЛР №1</a></li>
             <li><a href="#lab2">ЛР №2</a></li>
-            <li><a href="#lab4">ЛР №4 <span class="lab-placeholder">очікує</span></a></li>
+            <li><a href="#lab4">ЛР №4</a></li>
             <li><a href="#lab5">ЛР №5 <span class="lab-placeholder">очікує</span></a></li>
             <li><a href="#lab6">ЛР №6 <span class="lab-placeholder">очікує</span></a></li>
             <li><a href="#lab7">ЛР №7 <span class="lab-placeholder">очікує</span></a></li>
@@ -26,9 +26,9 @@
 
       <main class="content">
         <header class="hero">
-          <h2>Звіти з лабораторних робіт №1-2</h2>
+          <h2>Звіти з лабораторних робіт №1-4</h2>
           <p>
-            HTML-документ, семантична розмітка, GitHub, бізнес-логіка WEB-застосунку та стильове оформлення за допомогою CSS.
+            HTML-документ, семантична розмітка, GitHub, бізнес-логіка WEB-застосунку, CSS та функціональне застосування JavaScript.
           </p>
         </header>
 
@@ -512,7 +512,193 @@ textarea[placeholder] {
 
         <section id="lab4" aria-labelledby="lab4-title">
           <h2 id="lab4-title">Лабораторна робота №4</h2>
-          <p>Розділ буде заповнено після виконання відповідної лабораторної роботи.</p>
+          <p>
+            Тема: основи JavaScript у HTML-документі, шаблонні рядки, керування порядком обчислень, масиви, методи масивів і функції.
+          </p>
+          <table class="info-table">
+            <tbody>
+              <tr>
+                <th scope="row">Мета</th>
+                <td>Придбати практичні навички роботи з конструкціями мови JavaScript, масивами та функціями у JS-сценаріях.</td>
+              </tr>
+              <tr>
+                <th scope="row">WEB-застосунок</th>
+                <td><a href="../IP-zp51_appWEB-YereshchenkoMO-FIOT-2025/lab4-js.html">StudyTask: сторінка ЛР №4 JavaScript</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Варіант</th>
+                <td>Робоче припущення: непарна колонка для задач №1-6 та №8, варіант 1 для задач №7 і №9.</td>
+              </tr>
+              <tr>
+                <th scope="row">GitHub/GitHub Pages</th>
+                <td><span class="tag">додати після публікації</span> Віддалені репозиторії та live-посилання ще не створювалися.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section aria-labelledby="lab4-task1-title">
+          <h2 id="lab4-task1-title">Завдання №1: prompt(), alert(), шаблонний рядок</h2>
+          <p>Умова: зберегти введене значення у змінну, вивести його у Console, перевірити знак числа та показати результат через alert().</p>
+          <pre class="code-block"><code>function classifyNumber(value) {
+  const number = Number(value);
+  if (Number.isNaN(number)) return "Некоректне значення";
+  if (number &gt; 0) return "Число додатнє";
+  if (number &lt; 0) return "Число від'ємне";
+  return "Число дорівнює нулю";
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-task1.png" alt="Результат виконання завдання №1">
+            <figcaption>Результат виконання задачі №1 у сторінці ЛР №4 та console output.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab4-task2-title">
+          <h2 id="lab4-task2-title">Завдання №2: switch-case</h2>
+          <p>Умова: запитати число 1-4 і через <code>switch-case</code> визначити пору року.</p>
+          <pre class="code-block"><code>function getSeason(number) {
+  switch (String(number).trim()) {
+    case "1": return "зима";
+    case "2": return "весна";
+    case "3": return "літо";
+    case "4": return "осінь";
+    default: return "невідоме значення";
+  }
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-task2.png" alt="Результат виконання завдання №2">
+            <figcaption>Результат виконання задачі №2 із застосуванням <code>switch-case</code>.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab4-task3-title">
+          <h2 id="lab4-task3-title">Завдання №3: перевірка логіну і паролю</h2>
+          <p>Умова: перевірити логіни Admin/User та відповідні паролі, використати prompt(), alert() і console output.</p>
+          <pre class="code-block"><code>const credentials = { Admin: "admin123", User: "user123" };
+
+function authenticate(login, password) {
+  if (login === null || String(login).trim() === "") return "Cancelled";
+  const normalizedLogin = String(login).trim();
+  if (!Object.hasOwn(credentials, normalizedLogin)) return "I don't know you";
+  if (password === credentials[normalizedLogin]) return `Hello, ${normalizedLogin}`;
+  return "Wrong password";
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-task3.png" alt="Результат виконання завдання №3">
+            <figcaption>Результат перевірки логіну Admin з правильним паролем.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab4-task4-title">
+          <h2 id="lab4-task4-title">Завдання №4: функція makeTransaction</h2>
+          <p>Умова: оголосити функцію для повідомлення про купівлю ремонтних дроїдів.</p>
+          <pre class="code-block"><code>function makeTransaction(quantity, pricePerDroid) {
+  const totalPrice = quantity * pricePerDroid;
+  return `You ordered ${quantity} droids worth ${totalPrice} credits!`;
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-task4.png" alt="Результат виконання завдання №4">
+            <figcaption>Результат виклику <code>makeTransaction(5, 3000)</code>.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab4-task5-title">
+          <h2 id="lab4-task5-title">Завдання №5: функція checkForSpam</h2>
+          <p>Умова: перевірити рядок на слова <code>spam</code> і <code>sale</code> незалежно від регістру.</p>
+          <pre class="code-block"><code>function checkForSpam(message) {
+  const normalized = String(message).toLowerCase();
+  return normalized.includes("spam") || normalized.includes("sale");
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-task5.png" alt="Результат виконання завдання №5">
+            <figcaption>Результати перевірки повідомлення зі словом SALE і звичайного повідомлення.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab4-task6-title">
+          <h2 id="lab4-task6-title">Завдання №6: функція filterArray</h2>
+          <p>Умова: повернути новий масив лише з тих чисел, які більші за задане значення.</p>
+          <pre class="code-block"><code>function filterArray(numbers, value) {
+  const filtered = [];
+  for (const number of numbers) {
+    if (number &gt; value) filtered.push(number);
+  }
+  return filtered;
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-task6.png" alt="Результат виконання завдання №6">
+            <figcaption>Результат фільтрації масиву <code>[1, 8, 3, 14, 5, 21]</code> за значенням <code>7</code>.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab4-task7-title">
+          <h2 id="lab4-task7-title">Завдання №7: масив, перестановка, сортування вставкою</h2>
+          <p>Умова варіанта 1: створити масив, знайти максимальний серед парних елементів і мінімальний серед елементів з парними індексами, поміняти їх місцями, надрукувати масиви і виконати сортування вставкою.</p>
+          <pre class="code-block"><code>function processVariantOneArray(numbers) {
+  const swapped = [...numbers];
+  const maxEvenIndex = findIndexOfMaxEvenValue(swapped);
+  const minEvenIndexIndex = findIndexOfMinEvenIndex(swapped);
+  [swapped[maxEvenIndex], swapped[minEvenIndexIndex]] =
+    [swapped[minEvenIndexIndex], swapped[maxEvenIndex]];
+  return { source: numbers, swapped, sorted: insertionSortAscending(swapped) };
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-task7.png" alt="Результат виконання завдання №7">
+            <figcaption>Вхідний масив, масив після перестановки та результат сортування методом вставки.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab4-task8-title">
+          <h2 id="lab4-task8-title">Завдання №8: двовимірний масив</h2>
+          <p>Умова: створити двовимірний масив додатних і від'ємних чисел, вивести його у Console, створити масив додатних і масив від'ємних чисел, третій елемент у додатному масиві замінити на від'ємне значення.</p>
+          <pre class="code-block"><code>function splitMatrixNumbers(matrix, replacementValue) {
+  const flat = matrix.flat();
+  const positives = flat.filter((number) =&gt; number &gt; 0);
+  const negatives = flat.filter((number) =&gt; number &lt; 0);
+  const updatedPositives = [...positives];
+  updatedPositives[2] = Number(replacementValue);
+  return { matrix, positives, negatives, updatedPositives };
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-task8.png" alt="Результат виконання завдання №8">
+            <figcaption>Матриця, додатні/від'ємні значення та оновлений масив додатних чисел.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab4-task9-title">
+          <h2 id="lab4-task9-title">Завдання №9: валідація HTML-форми</h2>
+          <p>Умова варіанта 1: забезпечити перевірку цілого числа, дійсного числа, дати у форматі DD.MM.YYYY, однаковості паролів і обов'язкових полів.</p>
+          <pre class="code-block"><code>function validateRegistrationForm(data) {
+  const errors = [];
+  if (!data.name.trim()) errors.push("Ім'я є обов'язковим полем");
+  if (!/^-?\d+$/.test(data.age)) errors.push("Ціле число має містити тільки цифри");
+  if (!/^-?\d+([.,]\d+)?$/.test(data.rating)) errors.push("Некоректне дійсне число");
+  if (!isValidDate(data.date)) errors.push("Некоректна дата");
+  if (data.password !== data.confirm) errors.push("Паролі не збігаються");
+  return { valid: errors.length === 0, errors };
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-task9.png" alt="Результат виконання завдання №9">
+            <figcaption>Результат перевірки валідної HTML-форми реєстрації.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab4-console-title">
+          <h2 id="lab4-console-title">Console output задач №1-9</h2>
+          <p>
+            Кнопка "Запустити всі демо" на сторінці WEB-застосунку виконує всі задачі з фіксованими тестовими значеннями і дублює результат у браузерну Console та блок <code>Console output</code>.
+          </p>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab4-console.png" alt="Console output для задач ЛР №4">
+            <figcaption>Загальний console output після запуску задач №1-9.</figcaption>
+          </figure>
+        </section>
+
+        <section class="conclusion" aria-labelledby="lab4-conclusion-title">
+          <h2 id="lab4-conclusion-title">Висновки до ЛР №4</h2>
+          <p>
+            У лабораторній роботі №4 реалізовано задачі з основ JavaScript: використано <code>prompt()</code>, <code>alert()</code>, шаблонні рядки, <code>switch-case</code>, функції, одновимірні й двовимірні масиви, методи масивів, сортування вставкою та валідацію HTML-форми. Для перевірки створено окрему сторінку WEB-застосунку з кнопками запуску задач і console output.
+          </p>
         </section>
 
         <section id="lab5" aria-labelledby="lab5-title">
