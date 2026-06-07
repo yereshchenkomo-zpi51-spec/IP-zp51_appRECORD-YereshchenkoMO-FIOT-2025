@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Звіт з лабораторних робіт - Єрещенко М.О.</title>
+    <meta name="description" content="Звітний HTML-документ лабораторних робіт з основ клієнтських розробок.">
+    <link rel="stylesheet" href="assets/report.css">
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar" aria-label="Навігація звіту">
+        <h1>Звітний HTML-документ</h1>
+        <p class="student">Єрещенко М.О.<br>група ІП-зп51<br>ФІОТ, 2025</p>
+        <nav>
+          <ul class="nav-list">
+            <li><a class="active" href="#lab1">ЛР №1</a></li>
+            <li><a href="#lab2">ЛР №2 <span class="lab-placeholder">очікує</span></a></li>
+            <li><a href="#lab4">ЛР №4 <span class="lab-placeholder">очікує</span></a></li>
+            <li><a href="#lab5">ЛР №5 <span class="lab-placeholder">очікує</span></a></li>
+            <li><a href="#lab6">ЛР №6 <span class="lab-placeholder">очікує</span></a></li>
+            <li><a href="#lab7">ЛР №7 <span class="lab-placeholder">очікує</span></a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="hero">
+          <h2>Лабораторна робота №1</h2>
+          <p>
+            Теги та атрибути HTML-документа. Структурна розмітка. Git, GitHub, робота з репозиторіями. Опис логіки власного WEB-застосунку.
+          </p>
+        </header>
+
+        <section id="lab1" aria-labelledby="lab1-title">
+          <h2 id="lab1-title">Тема, мета, місце розташування ЛР №1.1</h2>
+          <table class="info-table">
+            <tbody>
+              <tr>
+                <th scope="row">Виконав</th>
+                <td>Єрещенко М.О., студент групи ІП-зп51</td>
+              </tr>
+              <tr>
+                <th scope="row">Тема ЛР №1.1</th>
+                <td>HTML-документ, семантична структура сторінки, GitHub, репозиторії та бізнес-логіка власного WEB-застосунку.</td>
+              </tr>
+              <tr>
+                <th scope="row">Мета ЛР №1.1</th>
+                <td>Отримати практичні навички роботи з HTML-документом, семантичною версткою, таблицями, зображеннями, списками, формами, посиланнями та описом логіки WEB-застосунку.</td>
+              </tr>
+              <tr>
+                <th scope="row">Назва власного WEB-застосунку</th>
+                <td>StudyTask - навчальний планувальник завдань студента.</td>
+              </tr>
+              <tr>
+                <th scope="row">Локальне розташування WEB-застосунку</th>
+                <td><a href="../IP-zp51_appWEB-YereshchenkoMO-FIOT-2025/index.html">IP-zp51_appWEB-YereshchenkoMO-FIOT-2025/index.html</a></td>
+              </tr>
+              <tr>
+                <th scope="row">Репозиторій WEB-застосунку</th>
+                <td><span class="tag">додати після публікації на GitHub</span> Назва: IP-zp51_appWEB-YereshchenkoMO-FIOT-2025</td>
+              </tr>
+              <tr>
+                <th scope="row">Жива сторінка WEB-застосунку</th>
+                <td><span class="tag">додати після GitHub Pages</span> Локальна сторінка доступна за посиланням вище.</td>
+              </tr>
+              <tr>
+                <th scope="row">Репозиторій звітного HTML-документа</th>
+                <td><span class="tag">додати після публікації на GitHub</span> Назва: IP-zp51_appRECORD-YereshchenkoMO-FIOT-2025</td>
+              </tr>
+              <tr>
+                <th scope="row">Жива сторінка звітного HTML-документа</th>
+                <td><span class="tag">додати після GitHub Pages</span> Поточний файл: index.html у цій папці.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section aria-labelledby="topic-title">
+          <h2 id="topic-title">Тема та мета власного WEB-застосунку</h2>
+          <p>
+            Тема застосунку - планування навчальних завдань студента за дисциплінами, дедлайнами, пріоритетами та статусом виконання.
+          </p>
+          <p>
+            Мета створення StudyTask - надати студенту простий інструмент для контролю навчального навантаження, щоб своєчасно бачити актуальні лабораторні роботи, етапи виконання та найближчі дедлайни.
+          </p>
+        </section>
+
+        <section aria-labelledby="logic-title">
+          <h2 id="logic-title">Опис бізнес-логіки</h2>
+          <p>
+            Предметна область застосунку охоплює індивідуальне планування навчання. Користувачем є студент, який створює завдання, прив'язує їх до дисциплін, визначає дедлайн, пріоритет і статус виконання.
+          </p>
+          <p>
+            Основний процес: студент додає завдання, система показує його у таблиці, виділяє найближчі дедлайни та допомагає контролювати прогрес виконання. Детальний опис винесено на сторінку <a href="../IP-zp51_appWEB-YereshchenkoMO-FIOT-2025/business-logic.html">business-logic.html</a>.
+          </p>
+        </section>
+
+        <section aria-labelledby="requirements-title">
+          <h2 id="requirements-title">Функціональні та нефункціональні вимоги</h2>
+          <table class="requirements-table">
+            <thead>
+              <tr>
+                <th scope="col">Тип вимог</th>
+                <th scope="col">Опис</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Функціональні</th>
+                <td>
+                  Додавання навчального завдання через форму; відображення задач у таблиці; збереження дисципліни, дедлайну, статусу та пріоритету; перехід на сторінку бізнес-логіки; показ короткої статистики тижня.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Нефункціональні</th>
+                <td>
+                  Семантична HTML-структура; адаптивність для різних екранів; доступні поля форми з label; зрозуміла навігація; швидке завантаження сторінок; мінімізація зайвих персональних даних.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section aria-labelledby="structure-title">
+          <h2 id="structure-title">Структура головної сторінки WEB-застосунку</h2>
+          <p>
+            Головна сторінка побудована за принципами семантичної верстки. Використано елементи <code>header</code>, <code>nav</code>, <code>main</code>, <code>section</code>, <code>article</code>, <code>aside</code>, <code>figure</code>, <code>figcaption</code> та <code>footer</code>.
+          </p>
+          <pre class="code-block"><code>&lt;header class="site-header"&gt;
+  &lt;a class="brand" href="index.html"&gt;StudyTask&lt;/a&gt;
+  &lt;nav class="site-nav" aria-label="Основна навігація"&gt;
+    &lt;a href="#schedule"&gt;Розклад&lt;/a&gt;
+    &lt;a href="#features"&gt;Можливості&lt;/a&gt;
+    &lt;a href="#request"&gt;Додати завдання&lt;/a&gt;
+    &lt;a href="business-logic.html"&gt;Бізнес-логіка&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;section class="hero" aria-labelledby="hero-title"&gt;...&lt;/section&gt;
+  &lt;section id="schedule" class="panel"&gt;...&lt;/section&gt;
+  &lt;section id="features" class="panel"&gt;...&lt;/section&gt;
+  &lt;section id="request" class="panel"&gt;...&lt;/section&gt;
+&lt;/main&gt;</code></pre>
+        </section>
+
+        <section aria-labelledby="table-title">
+          <h2 id="table-title">HTML-код таблиці та результат</h2>
+          <p>
+            Для таблиць застосовують теги <code>table</code>, <code>caption</code>, <code>thead</code>, <code>tbody</code>, <code>tr</code>, <code>th</code> і <code>td</code>. Атрибут <code>scope</code> допомагає пов'язати заголовок із рядком або стовпцем, а <code>colspan</code> та <code>rowspan</code> об'єднують комірки.
+          </p>
+          <pre class="code-block"><code>&lt;table class="schedule-table"&gt;
+  &lt;caption&gt;Поточний навчальний тиждень студента&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Дисципліна&lt;/th&gt;
+      &lt;th scope="col"&gt;Завдання&lt;/th&gt;
+      &lt;th scope="col"&gt;Дедлайн&lt;/th&gt;
+      &lt;th scope="col"&gt;Статус&lt;/th&gt;
+      &lt;th scope="col"&gt;Пріоритет&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Основи клієнтських розробок&lt;/td&gt;
+      &lt;td&gt;ЛР №1: семантична HTML-сторінка&lt;/td&gt;
+      &lt;td&gt;&lt;time datetime="2026-06-10"&gt;10.06.2026&lt;/time&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;span class="tag hot"&gt;у роботі&lt;/span&gt;&lt;/td&gt;
+      &lt;td&gt;Високий&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/table.png" alt="Скріншот таблиці навчальних завдань">
+            <figcaption>Скріншот таблиці з головної сторінки WEB-застосунку.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="image-title">
+          <h2 id="image-title">HTML-код зображення та результат</h2>
+          <p>
+            Для вставлення зображення використовується тег <code>img</code>. Обов'язковим для доступності є атрибут <code>alt</code>, який описує вміст зображення. Атрибути <code>src</code>, <code>width</code> і <code>height</code> задають шлях до файлу та його розміри.
+          </p>
+          <pre class="code-block"><code>&lt;figure class="hero-media"&gt;
+  &lt;img src="assets/study-dashboard.svg"
+       alt="Ілюстрація панелі StudyTask з курсами, дедлайнами і планом занять"
+       width="960"
+       height="560"&gt;
+  &lt;figcaption&gt;Приклад майбутньої панелі контролю навчального навантаження.&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/image.png" alt="Скріншот зображення панелі StudyTask">
+            <figcaption>Скріншот зображення, використаного на головній сторінці.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lists-title">
+          <h2 id="lists-title">HTML-код списків та результат</h2>
+          <p>
+            Маркірований список створюється тегом <code>ul</code>, нумерований - тегом <code>ol</code>, а кожен пункт списку розміщується у <code>li</code>. Атрибут <code>type</code> може змінювати тип маркера або нумерації.
+          </p>
+          <pre class="code-block"><code>&lt;ul&gt;
+  &lt;li&gt;додавання навчальних завдань;&lt;/li&gt;
+  &lt;li&gt;перегляд таблиці дедлайнів;&lt;/li&gt;
+  &lt;li&gt;фільтрація задач за дисципліною та статусом;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;студент відкриває панель StudyTask;&lt;/li&gt;
+  &lt;li&gt;переглядає актуальні дедлайни;&lt;/li&gt;
+  &lt;li&gt;додає нове завдання через форму;&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lists.png" alt="Скріншот маркірованого та нумерованого списків">
+            <figcaption>Скріншот списків можливостей і сценарію роботи.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="questions-title">
+          <h2 id="questions-title">Контрольні питання</h2>
+          <h3>1. Яка структура HTML-документу?</h3>
+          <p>Типова структура містить <code>doctype</code>, кореневий елемент <code>html</code>, службову частину <code>head</code> з метаданими та видиму частину <code>body</code> з контентом сторінки.</p>
+          <h3>2. Дати визначення тега.</h3>
+          <p>Тег - це елемент мови HTML, який позначає структуру або призначення частини документа. Більшість тегів мають відкривальну і закривальну форму, наприклад <code>&lt;p&gt;...&lt;/p&gt;</code>.</p>
+          <h3>3. Які теги використовуються при роботі з таблицями?</h3>
+          <p>Основні теги: <code>table</code>, <code>caption</code>, <code>thead</code>, <code>tbody</code>, <code>tfoot</code>, <code>tr</code>, <code>th</code>, <code>td</code>, <code>colgroup</code>, <code>col</code>.</p>
+          <h3>4. Які теги використовуються при роботі із зображеннями?</h3>
+          <p>Найчастіше використовують <code>img</code>, <code>figure</code>, <code>figcaption</code>, <code>picture</code> і <code>source</code>.</p>
+          <h3>5. Які теги використовуються при роботі зі списками?</h3>
+          <p>Для списків використовують <code>ul</code>, <code>ol</code>, <code>li</code>, а для списків визначень - <code>dl</code>, <code>dt</code>, <code>dd</code>.</p>
+          <h3>6. Перерахувати засоби опису таблиць в HTML.</h3>
+          <p>Таблиці описують через заголовок <code>caption</code>, рядки <code>tr</code>, клітинки <code>td</code>, заголовкові клітинки <code>th</code>, групи рядків <code>thead</code>, <code>tbody</code>, <code>tfoot</code>, атрибути <code>scope</code>, <code>colspan</code> і <code>rowspan</code>.</p>
+        </section>
+
+        <section class="conclusion" aria-labelledby="conclusion-title">
+          <h2 id="conclusion-title">Висновки</h2>
+          <p>
+            У лабораторній роботі №1 створено HTML-структуру власного WEB-застосунку StudyTask і звітний HTML-документ. На головній сторінці застосовано семантичні теги, заголовки різних рівнів, зображення, таблицю, маркірований і нумерований списки, форму та посилання на сторінку з бізнес-логікою. У звіті наведено тему, мету, опис предметної області, вимоги, приклади HTML-коду, теоретичні відомості та відповіді на контрольні питання.
+          </p>
+        </section>
+
+        <section aria-labelledby="sources-title">
+          <h2 id="sources-title">Список літератури та електронних джерел</h2>
+          <ol>
+            <li><a href="https://w3schoolsua.github.io/html/index.html">HTML Підручник українською - W3SchoolsUA</a></li>
+            <li><a href="https://w3schoolsua.github.io/tags/index.html">HTML Довідник тегів - W3SchoolsUA</a></li>
+            <li><a href="https://w3schoolsua.github.io/css/index.html">CSS Підручник українською - W3SchoolsUA</a></li>
+            <li><a href="https://css.in.ua/html/tags">Довідник HTML тегів - css.in.ua</a></li>
+            <li><a href="https://www.w3schools.com/">W3Schools - Learn to Code</a></li>
+          </ol>
+        </section>
+
+        <section id="lab2" aria-labelledby="lab2-title">
+          <h2 id="lab2-title">Лабораторна робота №2</h2>
+          <p>Розділ буде заповнено після виконання наступної лабораторної роботи.</p>
+        </section>
+
+        <section id="lab4" aria-labelledby="lab4-title">
+          <h2 id="lab4-title">Лабораторна робота №4</h2>
+          <p>Розділ буде заповнено після виконання відповідної лабораторної роботи.</p>
+        </section>
+
+        <section id="lab5" aria-labelledby="lab5-title">
+          <h2 id="lab5-title">Лабораторна робота №5</h2>
+          <p>Розділ буде заповнено після виконання відповідної лабораторної роботи.</p>
+        </section>
+
+        <section id="lab6" aria-labelledby="lab6-title">
+          <h2 id="lab6-title">Лабораторна робота №6</h2>
+          <p>Розділ буде заповнено після виконання відповідної лабораторної роботи.</p>
+        </section>
+
+        <section id="lab7" aria-labelledby="lab7-title">
+          <h2 id="lab7-title">Лабораторна робота №7</h2>
+          <p>Розділ буде заповнено після виконання відповідної лабораторної роботи.</p>
+        </section>
+
+        <footer>
+          <p>Звіт створено для послідовного доповнення результатами лабораторних робіт.</p>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
