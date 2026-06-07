@@ -19,16 +19,16 @@
             <li><a href="#lab4">ЛР №4</a></li>
             <li><a href="#lab5">ЛР №5</a></li>
             <li><a href="#lab6">ЛР №6</a></li>
-            <li><a href="#lab7">ЛР №7 <span class="lab-placeholder">очікує</span></a></li>
+            <li><a href="#lab7">ЛР №7</a></li>
           </ul>
         </nav>
       </aside>
 
       <main class="content">
         <header class="hero">
-          <h2>Звіти з лабораторних робіт №1-6</h2>
+          <h2>Звіти з лабораторних робіт №1-7</h2>
           <p>
-            HTML-документ, семантична розмітка, GitHub, бізнес-логіка WEB-застосунку, CSS, функціональне застосування JavaScript, об'єкти, callback, стрілочні функції, DOM, події та делегування подій.
+            HTML-документ, семантична розмітка, GitHub, бізнес-логіка WEB-застосунку, CSS, JavaScript, об'єкти, callback, стрілочні функції, DOM, події, делегування подій, Web Storage API, асинхронність, проміси, REST API і пагінація.
           </p>
         </header>
 
@@ -1062,7 +1062,213 @@ function createBoxes(amount, container = document.getElementById("boxes")) {
 
         <section id="lab7" aria-labelledby="lab7-title">
           <h2 id="lab7-title">Лабораторна робота №7</h2>
-          <p>Розділ буде заповнено після виконання відповідної лабораторної роботи.</p>
+          <p>
+            Тема: модульність коду, Node.js, JSON, Web Storage API, асинхронність, проміси, HTTP-запити, REST API, AJAX, крос-доменні запити, пагінація, CRUD.
+          </p>
+          <table class="info-table">
+            <tbody>
+              <tr>
+                <th scope="row">Мета</th>
+                <td>Придбати практичні навички роботи з Web Storage API, промісами, асинхронними HTTP-запитами, REST API, модальними вікнами, пагінацією та динамічним створенням DOM-елементів.</td>
+              </tr>
+              <tr>
+                <th scope="row">Особливість джерела</th>
+                <td>Файл завдання має назву ЛР №7, але внутрішній заголовок документа містить "ЛАБОРАТОРНА РОБОТА №8". У цьому звіті роботу оформлено як ЛР №7 відповідно до послідовності курсу.</td>
+              </tr>
+              <tr>
+                <th scope="row">Постановка задачі</th>
+                <td>
+                  У власному WEB-застосунку створити кошик із пагінацією. Додати галерею зображень із масиву даних і модальним переглядом, форму збереження даних у localStorage, таймер зворотного відліку, генератор промісів і пошук зображень через Fetch API/Pixabay або локальний демо-набір без ключа.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">WEB-застосунок</th>
+                <td><a href="../IP-zp51_appWEB-YereshchenkoMO-FIOT-2025/lab7-storage.html">StudyTask: сторінка ЛР №7 Web Storage і асинхронність</a></td>
+              </tr>
+              <tr>
+                <th scope="row">HTML/CSS/JS-файли</th>
+                <td><code>lab7-storage.html</code>, <code>style.css</code>, <code>assets/lab7.js</code></td>
+              </tr>
+              <tr>
+                <th scope="row">GitHub/GitHub Pages</th>
+                <td>
+                  <a href="https://github.com/yereshchenkomo-zpi51-spec/IP-zp51_appWEB-YereshchenkoMO-FIOT-2025">WEB-репозиторій</a>,
+                  <a href="https://yereshchenkomo-zpi51-spec.github.io/IP-zp51_appWEB-YereshchenkoMO-FIOT-2025/lab7-storage.html">сторінка ЛР №7 на GitHub Pages</a>.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section aria-labelledby="lab7-cart-title">
+          <h2 id="lab7-cart-title">Завдання №1: кошик і пагінація</h2>
+          <p>
+            У WEB-застосунку створено каталог навчальних товарів, який розбивається на сторінки. Кошик зберігається у localStorage, підтримує додавання, видалення і очищення позицій.
+          </p>
+          <pre class="code-block"><code>function paginateItems(items, page, perPage) {
+  const totalPages = Math.max(1, Math.ceil(items.length / perPage));
+  const safePage = Math.min(Math.max(1, page), totalPages);
+  const start = (safePage - 1) * perPage;
+  return {
+    items: items.slice(start, start + perPage),
+    page: safePage,
+    totalPages,
+  };
+}
+
+function addToCart(productId) {
+  cartState.items[productId] = (cartState.items[productId] || 0) + 1;
+  saveCart();
+  renderCart();
+  return { ...cartState.items };
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab7-cart.png" alt="Кошик і пагінація ЛР №7">
+            <figcaption>Каталог товарів з пагінацією і кошик, стан якого зберігається у localStorage.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab7-gallery-title">
+          <h2 id="lab7-gallery-title">Завдання №2: галерея і модальне вікно</h2>
+          <p>
+            Галерея створюється динамічно з масиву <code>images</code>. Клік обробляється делегуванням на <code>ul.gallery</code>. Якщо CDN-бібліотека basicLightbox доступна, відкривається її модальне вікно; інакше використовується локальний fallback.
+          </p>
+          <pre class="code-block"><code>function renderGallery() {
+  const gallery = document.querySelector(".lab7-gallery");
+  gallery.innerHTML = images
+    .map((image) =&gt; `&lt;li class="gallery-item"&gt;
+      &lt;a href="${image.original}"&gt;
+        &lt;img src="${image.preview}" alt="${escapeHtml(image.description)}" loading="lazy"&gt;
+      &lt;/a&gt;
+      &lt;p&gt;${escapeHtml(image.description)}&lt;/p&gt;
+    &lt;/li&gt;`)
+    .join("");
+}
+
+function handleGalleryClick(event) {
+  const link = event.target.closest("a");
+  const gallery = event.currentTarget;
+  if (!link || !gallery.contains(link)) return;
+  event.preventDefault();
+  openGalleryModal(link.href, link.querySelector("img").alt);
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab7-gallery-modal.png" alt="Галерея ЛР №7 з модальним переглядом">
+            <figcaption>Модальне вікно відкриває збільшену версію зображення після кліку по елементу галереї.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab7-storage-form-title">
+          <h2 id="lab7-storage-form-title">Завдання №2: форма зворотного зв'язку і Web Storage API</h2>
+          <p>
+            Форма має поля email і message. Введені дані зберігаються у localStorage під ключем <code>feedback-form-state</code>, відновлюються після перезавантаження сторінки, перевіряються перед submit і очищаються після успішної відправки.
+          </p>
+          <pre class="code-block"><code>const formData = {
+  email: "",
+  message: "",
+};
+
+function handleFeedbackInput(event) {
+  const field = event.target;
+  if (!Object.prototype.hasOwnProperty.call(formData, field.name)) return;
+  formData[field.name] = field.value.trim();
+  saveJson("feedback-form-state", formData);
+}
+
+function submitFeedback(form) {
+  if (!formData.email || !formData.message) {
+    alert("Fill please all fields");
+    return { ok: false, data: { ...formData } };
+  }
+  const submitted = { ...formData };
+  localStorage.removeItem("feedback-form-state");
+  form.reset();
+  return { ok: true, data: submitted };
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab7-form-storage.png" alt="Форма ЛР №7 з localStorage">
+            <figcaption>Форма відновлює дані зі сховища і очищає їх після успішного submit.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab7-timer-promise-title">
+          <h2 id="lab7-timer-promise-title">Завдання №3 і №4: таймер та генератор промісів</h2>
+          <p>
+            Таймер використовує <code>convertMs()</code> і форматування через <code>padStart()</code>. Генератор промісів створює Promise, який виконується або відхиляється після вказаної затримки, а результат проходить через <code>then()</code>, <code>catch()</code> і <code>finally()</code>.
+          </p>
+          <pre class="code-block"><code>function convertMs(ms) {
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+  return {
+    days: Math.floor(ms / day),
+    hours: Math.floor((ms % day) / hour),
+    minutes: Math.floor(((ms % day) % hour) / minute),
+    seconds: Math.floor((((ms % day) % hour) % minute) / second),
+  };
+}
+
+function createPromise(delay, state) {
+  return new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      if (state === "fulfilled") resolve(delay);
+      else reject(delay);
+    }, delay);
+  });
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab7-timer-promise.png" alt="Таймер і генератор промісів ЛР №7">
+            <figcaption>Таймер показує час до майбутньої дати, а форма промісу створює notification після заданої затримки.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab7-search-title">
+          <h2 id="lab7-search-title">Завдання №5: пошук зображень, Fetch API і SimpleLightbox</h2>
+          <p>
+            Форма пошуку підтримує запит до Pixabay з параметрами <code>key</code>, <code>q</code>, <code>image_type=photo</code>, <code>orientation=horizontal</code>, <code>safesearch=true</code>. Без API key використовується локальний демо-набір з форматом відповіді Pixabay, що дозволяє перевірити DOM-рендер, loader, empty/error paths і Promise chain.
+          </p>
+          <pre class="code-block"><code>function fetchPixabayImages({ query, apiKey, page = 1, perPage = 12, fetcher = fetch }) {
+  if (!query.trim()) {
+    return Promise.reject(new Error("Search query is empty"));
+  }
+
+  if (!apiKey.trim()) {
+    const hits = mockPixabayHits.filter((hit) =&gt; hit.tags.toLowerCase().includes(query.toLowerCase()) || query === "study");
+    return new Promise((resolve) =&gt; {
+      setTimeout(() =&gt; resolve({ hits, totalHits: hits.length, synthetic: true }), 120);
+    });
+  }
+
+  return fetcher(buildPixabayUrl({ query, apiKey, page, perPage }))
+    .then((response) =&gt; {
+      if (!response.ok) throw new Error(`Pixabay HTTP ${response.status}`);
+      return response.json();
+    })
+    .then((data) =&gt; ({ ...data, synthetic: false }));
+}</code></pre>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab7-search.png" alt="Пошук зображень ЛР №7">
+            <figcaption>Результати пошуку зображень рендеряться в DOM; SimpleLightbox оновлюється після додавання карток.</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="lab7-console-title">
+          <h2 id="lab7-console-title">Console output ЛР №7</h2>
+          <p>
+            Кнопка "Запустити контрольний сценарій" перевіряє кошик, галерею, localStorage-форму, таймер, проміс і пошук зображень. Ключові результати дублюються у блок <code>Console output</code>.
+          </p>
+          <figure class="screenshot">
+            <img src="assets/screenshots/lab7-console.png" alt="Console output для задач ЛР №7">
+            <figcaption>Загальний console output після запуску контрольного сценарію ЛР №7.</figcaption>
+          </figure>
+        </section>
+
+        <section class="conclusion" aria-labelledby="lab7-conclusion-title">
+          <h2 id="lab7-conclusion-title">Висновки до ЛР №7</h2>
+          <p>
+            У лабораторній роботі №7 реалізовано практичну роботу з Web Storage API, JSON-серіалізацією, пагінацією, делегуванням подій, модальними вікнами, таймером, промісами, Fetch API та DOM-рендером результатів пошуку. Для перевірки створено окрему сторінку WEB-застосунку і JS-модуль <code>assets/lab7.js</code> з експортом функцій у <code>window.Lab7</code>.
+          </p>
         </section>
 
         <footer>
