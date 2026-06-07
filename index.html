@@ -530,7 +530,7 @@ textarea[placeholder] {
               </tr>
               <tr>
                 <th scope="row">Варіант</th>
-                <td>Робоче припущення: непарна колонка для задач №1-6 та №8, варіант 1 для задач №7 і №9.</td>
+                <td>Номер у списку групи: 5. Для задач №1-6 та №8 використано непарну колонку, для задач №7 і №9 виконано варіант 5.</td>
               </tr>
               <tr>
                 <th scope="row">GitHub/GitHub Pages</th>
@@ -638,19 +638,20 @@ function authenticate(login, password) {
         </section>
 
         <section aria-labelledby="lab4-task7-title">
-          <h2 id="lab4-task7-title">Завдання №7: масив, перестановка, сортування вставкою</h2>
-          <p>Умова варіанта 1: створити масив, знайти максимальний серед парних елементів і мінімальний серед елементів з парними індексами, поміняти їх місцями, надрукувати масиви і виконати сортування вставкою.</p>
-          <pre class="code-block"><code>function processVariantOneArray(numbers) {
-  const swapped = [...numbers];
-  const maxEvenIndex = findIndexOfMaxEvenValue(swapped);
-  const minEvenIndexIndex = findIndexOfMinEvenIndex(swapped);
-  [swapped[maxEvenIndex], swapped[minEvenIndexIndex]] =
-    [swapped[minEvenIndexIndex], swapped[maxEvenIndex]];
-  return { source: numbers, swapped, sorted: insertionSortAscending(swapped) };
+          <h2 id="lab4-task7-title">Завдання №7: масив і сортування вибором</h2>
+          <p>Умова варіанта 5: створити одновимірний масив, визначити максимальне та мінімальне значення серед елементів із парними та непарними номерами, після цього упорядкувати масив за спаданням методом вибору.</p>
+          <pre class="code-block"><code>function processVariantFiveArray(numbers) {
+  const source = [...numbers];
+  return {
+    source,
+    oddPositions: getPositionStats(source, 1),
+    evenPositions: getPositionStats(source, 0),
+    sorted: selectionSortDescending(source),
+  };
 }</code></pre>
           <figure class="screenshot">
             <img src="assets/screenshots/lab4-task7.png" alt="Результат виконання завдання №7">
-            <figcaption>Вхідний масив, масив після перестановки та результат сортування методом вставки.</figcaption>
+            <figcaption>Вхідний масив, максимум/мінімум для непарних і парних позицій та результат сортування вибором за спаданням.</figcaption>
           </figure>
         </section>
 
@@ -672,20 +673,26 @@ function authenticate(login, password) {
         </section>
 
         <section aria-labelledby="lab4-task9-title">
-          <h2 id="lab4-task9-title">Завдання №9: валідація HTML-форми</h2>
-          <p>Умова варіанта 1: забезпечити перевірку цілого числа, дійсного числа, дати у форматі DD.MM.YYYY, однаковості паролів і обов'язкових полів.</p>
-          <pre class="code-block"><code>function validateRegistrationForm(data) {
-  const errors = [];
-  if (!data.name.trim()) errors.push("Ім'я є обов'язковим полем");
-  if (!/^-?\d+$/.test(data.age)) errors.push("Ціле число має містити тільки цифри");
-  if (!/^-?\d+([.,]\d+)?$/.test(data.rating)) errors.push("Некоректне дійсне число");
-  if (!isValidDate(data.date)) errors.push("Некоректна дата");
-  if (data.password !== data.confirm) errors.push("Паролі не збігаються");
-  return { valid: errors.length === 0, errors };
+          <h2 id="lab4-task9-title">Завдання №9: слайд-шоу</h2>
+          <p>Умова варіанта 5: реалізувати перегляд зображень за таймером, налаштування розміру зображень, циклічність перегляду та зміну часу між переключеннями.</p>
+          <pre class="code-block"><code>function startSlideshow() {
+  const interval = Number(document.getElementById("slideshow-interval").value);
+  stopSlideshow();
+  slideshowState.timerId = setInterval(
+    () =&gt; changeSlide(1),
+    Math.max(Number.isFinite(interval) ? interval : 1500, 500)
+  );
+}
+
+function changeSlide(direction) {
+  const nextIndex = slideshowState.currentIndex + direction;
+  slideshowState.currentIndex =
+    (nextIndex + slideshowImages.length) % slideshowImages.length;
+  renderSlideshow();
 }</code></pre>
           <figure class="screenshot">
             <img src="assets/screenshots/lab4-task9.png" alt="Результат виконання завдання №9">
-            <figcaption>Результат перевірки валідної HTML-форми реєстрації.</figcaption>
+            <figcaption>Слайд-шоу з кнопками перемикання, таймером, інтервалом та налаштуванням ширини зображення.</figcaption>
           </figure>
         </section>
 
@@ -703,7 +710,7 @@ function authenticate(login, password) {
         <section class="conclusion" aria-labelledby="lab4-conclusion-title">
           <h2 id="lab4-conclusion-title">Висновки до ЛР №4</h2>
           <p>
-            У лабораторній роботі №4 реалізовано задачі з основ JavaScript: використано <code>prompt()</code>, <code>alert()</code>, шаблонні рядки, <code>switch-case</code>, функції, одновимірні й двовимірні масиви, методи масивів, сортування вставкою та валідацію HTML-форми. Для перевірки створено окрему сторінку WEB-застосунку з кнопками запуску задач і console output.
+            У лабораторній роботі №4 реалізовано задачі з основ JavaScript: використано <code>prompt()</code>, <code>alert()</code>, шаблонні рядки, <code>switch-case</code>, функції, одновимірні й двовимірні масиви, методи масивів, сортування вибором за спаданням і слайд-шоу для варіанта 5. Для перевірки створено окрему сторінку WEB-застосунку з кнопками запуску задач, інтерактивними елементами і console output.
           </p>
         </section>
 
@@ -724,7 +731,7 @@ function authenticate(login, password) {
               </tr>
               <tr>
                 <th scope="row">Варіант</th>
-                <td>Робоче припущення: непарний номер у списку групи. Завдання №1: варіанти 1, 3, 5, 7, 9, 10. Завдання №2: варіанти 1, 3, 5, 7.</td>
+                <td>Номер у списку групи: 5, тобто непарний номер. Завдання №1: варіанти 1, 3, 5, 7, 9, 10. Завдання №2: варіанти 1, 3, 5, 7.</td>
               </tr>
               <tr>
                 <th scope="row">GitHub/GitHub Pages</th>
